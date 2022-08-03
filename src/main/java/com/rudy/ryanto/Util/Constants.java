@@ -1,9 +1,8 @@
-package com.rudy.ryanto;
+package com.rudy.ryanto.Util;
 
 public class Constants {
 
     public static final String PATH_UPLOAD ="assets";
-    public static final String TESDATA="D:\\data-tesseract\\tessdata";
 
     public interface MIMETYPE{
         public String JPEG="image/jpeg";
