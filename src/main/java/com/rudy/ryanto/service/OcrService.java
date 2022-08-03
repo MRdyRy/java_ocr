@@ -4,7 +4,6 @@ import com.rudy.ryanto.Constants;
 import com.rudy.ryanto.Util.FileUploadUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +25,7 @@ public class OcrService {
             boolean isSuccess = FileUploadUtil.upload(uploadDir,fileName,multipartFile);
             if(isSuccess){
                 log.info("success upload file============! :D");
-                tesseract.setDatapath(uploadDir);
+                tesseract.setDatapath(Constants.TESDATA);
                 String text = tesseract.doOCR(new File(uploadDir+"/"+fileName));
                 log.info("result {}",text);
                 resultOCR = text;
