@@ -25,7 +25,7 @@ public class OcrService {
         log.info("service upload started...............!");
         String resultOCR = "";
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        String uploadDir = uploadDirPath+"/"+System.currentTimeMillis();
+        String uploadDir = uploadDirPath+"/upload";
         log.info("initialized upload : {} {}",fileName,uploadDir);
         try {
             boolean isSuccess = FileUploadUtil.upload(uploadDir,fileName,multipartFile);
