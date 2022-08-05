@@ -6,6 +6,7 @@ Ingredients :
 <li>tess4j</li>
 <li>owasp security logging</li>
 <li>JUnit</li>
+<li>lombok</li>
 </ul>
 
 
