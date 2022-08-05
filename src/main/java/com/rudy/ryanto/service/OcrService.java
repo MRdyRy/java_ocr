@@ -1,9 +1,8 @@
 package com.rudy.ryanto.service;
 
 import com.rudy.ryanto.Util.FileUploadUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.rudy.ryanto.Util.LoggingUtil;
 import net.sourceforge.tess4j.Tesseract;
-import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,10 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
-@Slf4j
 @Service
 public class OcrService {
-    Logger logger = ESAPI.getLogger(OcrService.class);
+    private static Logger logger = LoggingUtil.logger(OcrService.class);
 
     @Value("${upload.directory}")
     private String uploadDirPath;
@@ -25,21 +23,20 @@ public class OcrService {
     Tesseract tesseract;
 
     public String upload(MultipartFile multipartFile){
-        log.info("service upload started...............!");
+        LoggingUtil.logInfo(logger,Logger.EVENT_UNSPECIFIED,"service upload started...............!");
         String resultOCR = "";
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         String uploadDir = uploadDirPath+"/upload";
         try {
             boolean isSuccess = FileUploadUtil.upload(uploadDir,fileName,multipartFile);
             if(isSuccess){
-                log.info("success upload file============! :D");
-                logger.info(Logger.SECURITY_SUCCESS, "success upload file============! :D"+fileName);
-                logger.info(Logger.EVENT_UNSPECIFIED, "unspesific event");
+                LoggingUtil.logInfo(logger,Logger.EVENT_SUCCESS, "success upload file============! :D"+fileName);
                 String text = tesseract.doOCR(new File(uploadDir+"/"+fileName));
-                log.info("result {}",text);
+                LoggingUtil.logInfo(logger,Logger.EVENT_UNSPECIFIED, "result OCR : {}"+text);
                 resultOCR = text;
             }
         } catch (Exception e) {
+            LoggingUtil.logError(logger,Logger.EVENT_FAILURE,"failed to upload, caused : "+e.getMessage(),e);
             e.printStackTrace();
         }
         return resultOCR;
