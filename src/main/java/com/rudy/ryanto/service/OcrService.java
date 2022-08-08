@@ -33,6 +33,7 @@ public class OcrService {
                 LoggingUtil.logInfo(logger,Logger.EVENT_SUCCESS, "success upload file============! :D"+fileName);
                 String text = tesseract.doOCR(new File(uploadDir+"/"+fileName));
                 LoggingUtil.logInfo(logger,Logger.EVENT_UNSPECIFIED, "result OCR : {}"+text);
+                LoggingUtil.logInfo(logger,Logger.EVENT_UNSPECIFIED,"\n\nweb - 2017-04-12 17:47:08,957 [main] INFO Amount reversed successfully");
                 resultOCR = text;
             }
         } catch (Exception e) {
