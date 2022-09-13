@@ -1,5 +1,4 @@
-# Dummy OCR (java)
-Ingredients : 
+
 <ul>
 <li>java 11</li>
 <li>maven</li>
@@ -9,7 +8,5 @@ Ingredients :
 <li>lombok</li>
 </ul>
 
-
-to cook with this apps, you need to download tessdoc. <br/>
 official : https://tesseract-ocr.github.io/tessdoc/
 
